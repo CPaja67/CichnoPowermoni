@@ -1,0 +1,15 @@
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.GeneratedMSBuildEditorConfig.editorconfig
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.AssemblyInfoInputs.cache
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.AssemblyInfo.cs
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.csproj.CoreCompileInputs.cache
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.sourcelink.json
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\bin\Debug\net8.0\CPmoni.exe
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\bin\Debug\net8.0\CPmoni.deps.json
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\bin\Debug\net8.0\CPmoni.runtimeconfig.json
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\bin\Debug\net8.0\CPmoni.dll
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\bin\Debug\net8.0\CPmoni.pdb
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.dll
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\refint\CPmoni.dll
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.pdb
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\CPmoni.genruntimeconfig.cache
+E:\CPmoni\CichnoPowermoni\CPmoni\CPmoni\obj\Debug\net8.0\ref\CPmoni.dll
