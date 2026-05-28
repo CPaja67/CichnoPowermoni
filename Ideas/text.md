@@ -25,4 +25,4 @@ Energy +,
 ... 
 
 ## Jmena 
-Regginald, 
+Regginald, Vrbac, Pavlik, Fildon
