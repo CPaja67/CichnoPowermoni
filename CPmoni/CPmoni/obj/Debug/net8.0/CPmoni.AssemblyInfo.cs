@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CPmoni")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+427a9e4b46384f10a58a3e080d7b152eb61e5554")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c2cfd7fae17bd83506ee5e14fb0bdb174ac3146")]
 [assembly: System.Reflection.AssemblyProductAttribute("CPmoni")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CPmoni")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
