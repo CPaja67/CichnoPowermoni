@@ -22,11 +22,16 @@
         }
     }
 
+      void CreateItems()
+      {
+            
+      }
 
+     
     public Game()
     {
         CreateCPmon();
-
+        CreateItems();
     }
 
 }
