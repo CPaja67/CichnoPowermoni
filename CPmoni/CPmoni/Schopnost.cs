@@ -13,6 +13,7 @@
         Damage = damage;
         CritChance = critchance;
         Cooldown = cooldown;
+        if (statuseffects == null) return;
         for (int i = 0; i < statuseffects.Count; i++)
         {
             StatusEffects.Add(statuseffects[i]);

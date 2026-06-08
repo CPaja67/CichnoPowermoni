@@ -1,8 +1,8 @@
 ﻿class Game{
 
-    public List<CPmon> VsichniCPmoni {  get; set; }
-    public List<Item> VsechnyItemy { get; set; }
-    public List<Schopnost> VsechnySchopnosti { get; set; }
+    public List<CPmon> VsichniCPmoni = new List<CPmon>();
+    public List<Item> VsechnyItemy = new List<Item>();
+    public List<Schopnost> VsechnySchopnosti = new List<Schopnost>();
     public List<string> VsechnyJmenaCPmonu { get; set; }
     public List<string> VsechnyJmenaSchopnosti { get; set; }
 
@@ -81,17 +81,39 @@
 
     void CreateItems()
     {
-            
+            // pak udelej
     }
 
      
     public Game()
     {
         VsechnyJmenaCPmonu = new List<string>() {"Begginov","Regginald", "Vrbac", "Flusak", "Fildax", "Pikok", "Cammer", "Smiller", "Hrdlova koza", "Rovno zubac", "Slopper", "Ligman", "Tulo", "Hyggus", "Featus", "Kirox", "Michilus", "Krkax", "Grower", "Treelax", "Sifilas", "Teemor", "Tumorax", "Gutalux", "Kneacker", "Aidus", "Drafilax", "Zetyrox", "Lukylax", "Sajminax", "Somcokotax", "Kinarux", "Weertax", "Syntox", "Lollytaz", "Makarax", "Akratux", "Apilox", "Herektex", "Evickus", "Chlubimir", "Ghassys", "Chlorence", "Egmin", "Deformed Disgusting Ugly Fat Swine", "Eppsyn", "David Ngo Phong"}; 
-        VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Bubnovani na Bricho", "Kourova Clona", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce"}; 
+        VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Bubnovani na Bricho", "Kourova Clona", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce", "Postrikani", "Rucni Prace", "Uder Hlavou", "Tezke Nohy", "Klouzave Nozky", "Lobotomie", "Vyvrcholeni", "Spiritualni Dotek"}; 
         CreateCPmons();
         CreateSchopnosti();
         CreateItems();
+        StartGame();
     }
+
+
+    void StartGame()
+    {
+        foreach (CPmon item in VsichniCPmoni)
+        {
+            Console.WriteLine(item.Jmeno +" " + item.Health);
+        }
+        foreach (Schopnost item in VsechnySchopnosti)
+        {
+            Console.WriteLine(item.Jmeno + " " + item.Damage);
+        }
+        Console.WriteLine("jak se jmenujes");
+        MainMenu();
+    }
+
+    void MainMenu()
+    {
+        Console.WriteLine("co chces delat?");
+    }
+
 
 }
