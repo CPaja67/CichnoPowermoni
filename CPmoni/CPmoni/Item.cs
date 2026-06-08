@@ -1,64 +1,66 @@
-class Item{
-  public string Jmeno {get; set;}
-  public string Typ {get; set;}
-  public 
-}
-
-public void PouzitItem()
+class Item
 {
-    Random random = new Random();
+    public string Jmeno { get; set; }
+    public string Typ { get; set; }
 
-    
 
-
-    switch (Typ)
+    public void PouzitItem()
     {
-        case "SmallHeal":
-            int heal = random.Next(4,8);
+        Random random = new Random();
 
 
-            break;
-        case "MediumHeal":
 
-            break;
-        case "BigHeal":
 
-            break;
-        case "SmallDamage":
+        switch (Typ)
+        {
+            case "SmallHeal":
+                int heal = random.Next(4, 8);
 
-            break;
-        case "MediumDamage":
 
-            break;
-        case "BigDamage":
+                break;
+            case "MediumHeal":
 
-            break;
-        case "Cleanse":
+                break;
+            case "BigHeal":
 
-            break;
-        case "Fire":
+                break;
+            case "SmallDamage":
 
-            break;
-        case "Poison":
+                break;
+            case "MediumDamage":
 
-            break;
-        case "Sleep":
+                break;
+            case "BigDamage":
 
-            break;
-        case "Stun":
+                break;
+            case "Cleanse":
 
-            break;
+                break;
+            case "Fire":
+
+                break;
+            case "Poison":
+
+                break;
+            case "Sleep":
+
+                break;
+            case "Stun":
+
+                break;
+        }
+
+
     }
-        
-
-}
 
 
 
 
 
-public Item(string jmeno, string typ) 
-{
-    Jmeno = jmeno;
-    Typ = typ;
+    public Item(string jmeno, string typ)
+    {
+        Jmeno = jmeno;
+        Typ = typ;
+    }
+
 }
