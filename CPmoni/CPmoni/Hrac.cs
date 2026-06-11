@@ -2,13 +2,17 @@ class Hrac
 {
 
     public string Jmeno { get; set; }
-    public int Penize { get; set; }
-    public List<CPmon> UloveniCPmoni { get; set; }
-    public CPmon VybranyCPmon { get; set; }
-    public List<Item> Itemy { get; set; }
+    public int Penize = 10;
+    public List<CPmon> UloveniCPmoni = new List<CPmon>();
+    public CPmon VybranyCPmon;
+    public List<Item> Itemy = new List<Item>();
 
 
 
+    public Hrac(string jmeno)
+    {
+        Jmeno = jmeno;
+    }
 
     // Damage
     public void TakeDamage()
