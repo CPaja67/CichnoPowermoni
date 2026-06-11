@@ -1,11 +1,68 @@
-﻿class Game{
+class Game{
 
     public List<CPmon> VsichniCPmoni = new List<CPmon>();
     public List<Item> VsechnyItemy = new List<Item>();
     public List<Schopnost> VsechnySchopnosti = new List<Schopnost>();
     public List<string> VsechnyJmenaCPmonu { get; set; }
     public List<string> VsechnyJmenaSchopnosti { get; set; }
+    public List<string> VsechnyJmenaEfektu { get; set; }
+    public Hrac player;
 
+
+    //print funkce pro lehci printeni
+    void PrintBarva(string input, ConsoleColor barva)
+    {
+        Console.ForegroundColor = barva;
+        Console.Write(input);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+
+
+    void PrintCPmonStats(CPmon cpmon)
+    {
+        Console.Write("\nJmeno: ");
+        PrintBarva(cpmon.Jmeno, cpmon.Color);
+        Console.Write("\nHP: ");
+        PrintBarva(cpmon.Health.ToString() + " / " + cpmon.MaxHealth.ToString(), ConsoleColor.DarkGreen);
+        Console.Write("\nDefense: ");
+        PrintBarva(cpmon.Defense.ToString(), ConsoleColor.Gray);
+        Console.Write("\nLevel: ");
+        PrintBarva(cpmon.Level.ToString(), ConsoleColor.Yellow);
+        Console.Write("\nSchopnosti: ");
+        foreach(Schopnost s in cpmon.Schopnosti)
+        {
+            Console.Write("\n");
+            PrintBarva(s.Jmeno, ConsoleColor.Cyan);
+            Console.Write("\n - Level Requirement: ");
+            PrintBarva(s.LevelReq.ToString(), ConsoleColor.DarkYellow);
+            Console.Write("\n - Damage: ");
+            PrintBarva(s.Damage.ToString(), ConsoleColor.Red);
+            Console.Write("\n - Crit Chance: ");
+            PrintBarva(s.CritChance.ToString(), ConsoleColor.DarkRed);
+            Console.Write("\n - Cooldown: ");
+            PrintBarva(s.Cooldown.ToString(), ConsoleColor.DarkCyan);
+        
+            /*
+            Console.Write("\n - Effects: ");
+            foreach(Effect e in s.StatusEffects)
+            {
+                Console.Write("\n --- " + e.);
+            }
+            */
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //starter funce
 
     void CreateCPmons()
     {
@@ -98,22 +155,52 @@
 
     void StartGame()
     {
-        foreach (CPmon item in VsichniCPmoni)
+        bool loop = true;
+
+        while (loop)
         {
-            Console.WriteLine(item.Jmeno +" " + item.Health);
+            string Input, ChosenJmeno;
+            Console.WriteLine("jak se jmenujes");
+            ChosenJmeno = Console.ReadLine();
+
+            Console.Write("\nchces se takto jmenovat? (y/n)");
+            Input = Console.ReadLine();
+
+            if (Input == "y")
+            {
+                player = new Hrac(ChosenJmeno);
+                loop = false;
+            }
         }
-        foreach (Schopnost item in VsechnySchopnosti)
+
+        Console.Clear();
+        Console.Write("Vitej ");
+        PrintBarva(player.Jmeno, ConsoleColor.Blue);
+        Console.Write(", vyber si sveho prvniho Cichnapowermona");
+
+        Console.Write("\n----------------------------");
+
+        loop = true;
+        while (loop)
         {
-            Console.WriteLine(item.Jmeno + " " + item.Damage);
+            PrintCPmonStats(VsichniCPmoni[5]);
+            loop = false;
         }
-        Console.WriteLine("jak se jmenujes");
+
+
         MainMenu();
     }
 
     void MainMenu()
     {
-        Console.WriteLine("co chces delat?");
+        Console.Write("\nco chces delat?");
     }
+
+
+
+
+
+
 
 
 }
