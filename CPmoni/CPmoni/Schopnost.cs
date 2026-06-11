@@ -4,6 +4,7 @@
     public int Damage { get; set; }
     public int CritChance { get; set; }
     public int Cooldown { get; set; }
+    public int CurrentCooldown { get; set; }
     public int LevelReq { get; set; }
     public List<Effect> StatusEffects { get; set; }
 
@@ -13,6 +14,7 @@
         Damage = damage;
         CritChance = critchance;
         Cooldown = cooldown;
+        CurrentCooldown = Cooldown;
         if (statuseffects == null) return;
         for (int i = 0; i < statuseffects.Count; i++)
         {
