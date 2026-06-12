@@ -8,6 +8,8 @@ class Game{
     public List<Schopnost> VsechnySchopnosti = new List<Schopnost>();
     public List<string> VsechnyJmenaCPmonu { get; set; }
     public List<string> VsechnyJmenaSchopnosti { get; set; }
+    public List<string> VsechnyJmenaTreneru { get; set; }
+    public List<string> VsechnyJmenaItemu { get; set; }
     public List<string> VsechnyJmenaEfektu { get; set; }
     public Hrac player;
 
@@ -78,9 +80,10 @@ class Game{
             int health = random.Next(10, 20);
             int defense = random.Next(0, 5);
 
-            CPmon CPmon = new CPmon(VsechnyJmenaCPmonu[nameIndex], health, defense);
+            CPmon Cpmon = new CPmon(VsechnyJmenaCPmonu[nameIndex], health, defense);
+            
             VsechnyJmenaCPmonu.RemoveAt(nameIndex);
-            VsichniCPmoni.Add(CPmon);
+            VsichniCPmoni.Add(Cpmon);
         }
 
         VsichniDostupniCPmoni = VsichniCPmoni;
@@ -157,8 +160,9 @@ class Game{
     {
         VsechnyJmenaCPmonu = new List<string>() {"Begginov","Regginald", "Vrbac", "Flusak", "Fildax", "Pikok", "Cammer", "Smiller", "Hrdlova koza", "Rovno zubac", "Slopper", "Ligman", "Tulo", "Hyggus", "Featus", "Kirox", "Michilus", "Krkax", "Grower", "Treelax", "Sifilas", "Teemor", "Tumorax", "Gutalux", "Kneacker", "Aidus", "Drafilax", "Zetyrox", "Lukylax", "Sajminax", "Somcokotax", "Kinarux", "Weertax", "Syntox", "Lollytaz", "Makarax", "Akratux", "Apilox", "Herektex", "Evickus", "Chlubimir", "Ghassys", "Chlorence", "Egmin", "Deformed Disgusting Ugly Fat Swine", "Eppsyn", "David Ngo Phong", "polykac", "uzounek", "narazec", "lapylus", "deralit", "mogudaw", "negares", "casius", "perverzius", "cigitas", "begatas", "uranius", "hoshkuz", "galartos", "breberkus", "riditegas", "mocnygas", "kneegrower", "floydus", "kirkmaq", "urhafis" }; 
         VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Bubnovani na Bricho", "Kourova Clona", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce", "Postrikani", "Rucni Prace", "Uder Hlavou", "Tezke Nohy", "Klouzave Nozky", "Lobotomie", "Vyvrcholeni", "Spiritualni Dotek", "vsaknuti", "prehlt", "rychle nasazeni", "cracknuti", "rychly uhyb", "fajny kotoul", "hybernace", "snow balls", "obkrojeni", "kojeni", "revize", "rewatch", "svacina", "prestrojeni", "pitny rezim", "rychly jazyk", "hod daleky", "mocny dym", "mokry sen" }; 
-        CreateCPmons();
+        VsechnyJmenaTreneru = new List<string>() { "Zdenek", "Ferko Lacko", "Franta Majitel", "Uzka Vrba", "Jeff Einstein", "Bibi", "Bigus Eveckus", "Kotny Somko", "Uvolneny Leicman" };
         CreateSchopnosti();
+        CreateCPmons();
         CreateItems();
         StartGame();
     }
