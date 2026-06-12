@@ -209,22 +209,16 @@ class Game{
 
         while (loop)
         {
-            string Input, ChosenJmeno;
+            string ChosenJmeno;
             Console.WriteLine("jak se jmenujes?");
             ChosenJmeno = Console.ReadLine();
             if(ChosenJmeno == "")
             {
                 ChosenJmeno = "Hrac";
             }
+            player = new Hrac(ChosenJmeno);
+            loop = false;
 
-            Console.Write("chces se takto jmenovat? (y/n)");
-            Input = Console.ReadLine();
-
-            if (Input == "y")
-            {
-                player = new Hrac(ChosenJmeno);
-                loop = false;
-            }
         }
 
         // vyber prvniho CPmona
@@ -277,6 +271,7 @@ class Game{
         Console.Clear();
         Console.WriteLine("skvele, tvuj prvni CPmon je: ");
         PrintCPmonStats(player.UloveniCPmoni[0]);
+        player.UlovenychCPmonu++;
         Console.WriteLine("\n\n stiskni enter pro pokracovani...");
         Console.ReadLine();
 
@@ -297,7 +292,11 @@ class Game{
         string input;
         while (loop)
         {
-
+            if (player.UloveniCPmoni.Count == 0)
+            {
+                EndGame();
+                loop = false; break;
+            }
             Console.Clear();
             
             Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -396,12 +395,7 @@ class Game{
             }
             if (index < player.UloveniCPmoni.Count || index > 0)
             {
-                Console.WriteLine("jses si jist? (y/n)");
-                input = Console.ReadLine();
-                if (input == "y")
-                {
-                    loop = false;
-                }
+                loop = false;
             }
         }
         player.VybranyCPmon = player.UloveniCPmoni[index - 1];
@@ -456,10 +450,11 @@ class Game{
                         break;
                     case "4":
                         Console.Clear();
-                        Console.WriteLine("Tvuj CPmon:");
+                        PrintBarva("\n\n\n\n\n\nTvuj CPmon:", ConsoleColor.Blue);
                         PrintCPmonStats(player.VybranyCPmon);
-                        Console.WriteLine("\n\nProtivnikuv CPmon:");
+                        PrintBarva("\n\n\n\n\nProtivnikuv CPmon:", ConsoleColor.Red);
                         PrintCPmonStats(protivnik.EnemyCPmon);
+                        Console.ReadLine();
                         break;
                 }
             }
@@ -499,10 +494,12 @@ class Game{
                             // tady se dela utoceni
                             Console.WriteLine("Pouzil jsi ");
                             PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
+                            player.PocetPouzitychSchopnosti++;
                             Console.ReadLine();
 
                             AplikujDamage(zvolenaSchopnost, protivnik.EnemyCPmon);
-                            
+                            Console.ReadLine();
+
                             loop = false;
                         }
                         else
@@ -532,12 +529,14 @@ class Game{
         Console.WriteLine("Zpusobil jsi ");
         PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
         kdo.Health -= damage;
-        if(schopnost.CritChance > new Random().Next(0, 100))
+        player.CelkovyDamageDealt += damage;
+        if (schopnost.CritChance > new Random().Next(0, 100))
         {
-            PrintBarva("Criticky zasah, Zpusobil jsi jeste " + damage + "damage!", ConsoleColor.DarkRed);
+            PrintBarva("\nCriticky zasah, Zpusobil jsi jeste " + damage + " damage!", ConsoleColor.DarkRed);
             kdo.Health -= damage;
+            player.CelkovyDamageDealt += damage;
         }
-
+        /*
         if(schopnost.StatusEffects.Count > 0)
         {
             foreach (Effect e in schopnost.StatusEffects)
@@ -546,6 +545,7 @@ class Game{
                 // AplikujEffect(e, kdo, false);
             }
         }
+        */
     }
 
 
@@ -595,11 +595,11 @@ class Game{
 
     bool KonecTahu(CPmon enemyCPmon)
     {
-
+        // umrel enemyCPmon
         if (enemyCPmon.Health <= 0)
         {
             int mone = 0;
-            Console.WriteLine("Gratuluji, porazil jsi protivnika!");
+            Console.WriteLine("Gratuluji, porazil jsi protivnika! (enter)");
             Console.ReadLine();
             player.Vyhry++;
             mone = new Random().Next(4, 10) * player.Vyhry;
@@ -608,7 +608,33 @@ class Game{
             PrintBarva(mone.ToString() + " penizku", ConsoleColor.Yellow);
             Console.ReadLine();
             player.VybranyCPmon.Level += 1;
+            Console.Write("Tvuj CPmon se level-upnul");
+            Console.ReadLine();
+            Console.Write("nini je tento CPmon v tvem arsenalu"); 
+            enemyCPmon.Health = enemyCPmon.MaxHealth;
+            player.UloveniCPmoni.Add(enemyCPmon);
+            player.UlovenychCPmonu++;
+            Console.ReadLine();
             return false;
+        }
+
+        // umrel tvuj CPmon
+        if (player.VybranyCPmon.Health <= 0)
+        {
+            player.VybranyCPmon.Health = player.VybranyCPmon.MaxHealth;
+            VsichniDostupniCPmoni.Add(player.VybranyCPmon);
+            player.UloveniCPmoni.Remove(player.VybranyCPmon);
+            player.VybranyCPmon = null;
+            return false;
+        }
+
+        foreach (Schopnost s in player.VybranyCPmon.Schopnosti)
+        {
+            int index = player.VybranyCPmon.Schopnosti.IndexOf(s);
+            if (player.VybranyCPmon.SchopnostiCooldown[index] < s.Cooldown)
+            {
+                player.VybranyCPmon.SchopnostiCooldown[index]++;
+            }
         }
 
         Console.Write("Konec tvého tahu, teď je na řadě protivník! (enter)");
@@ -652,6 +678,15 @@ class Game{
         // zobrazovani inventare tady
     }
 
+
+    void VypsaniStatu() 
+    {
+        Console.WriteLine("Staty:");
+        Console.Write("\nVyhry: " + player.Vyhry.ToString());
+        Console.Write("\nPocet Pouzitych schopnosti: " + player.PocetPouzitychSchopnosti.ToString());
+        Console.Write("\nUloveni CPmoni: " + player.UlovenychCPmonu.ToString());
+    }
+
     void EndGame()
     {
         Console.Clear();
@@ -663,8 +698,12 @@ class Game{
         PrintBarva("\n\n\nBojoval jsi statecne,", ConsoleColor.Gray);
         PrintBarva(player.Jmeno, ConsoleColor.Blue);
         PrintBarva(", ale nakonec jsi byl premozen...", ConsoleColor.Gray);
-        Console.WriteLine("\n\n stiskni enter pro ukonceni...");
+        Console.WriteLine("\n\nstiskni enter pro vypsani statu...");
         Console.ReadLine();
+        VypsaniStatu();
+        Console.WriteLine("\n\nstiskni enter pro ukonceni...");
+        Console.ReadLine();
+
     }
 
 

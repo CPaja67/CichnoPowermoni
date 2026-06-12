@@ -3,7 +3,13 @@ class Hrac
 
     public string Jmeno { get; set; }
     public int Penize = 10;
+    //staty
     public int Vyhry = 0;
+    public int PocetPouzitychSchopnosti = 0;
+    public int UlovenychCPmonu = 0;
+    public int CelkovyDamageDealt = 0;
+    public int CelkovyDamageTaken = 0;
+
     public List<CPmon> UloveniCPmoni = new List<CPmon>();
     public CPmon VybranyCPmon;
     public List<Item> Itemy = new List<Item>();
