@@ -3,6 +3,7 @@ class Hrac
 
     public string Jmeno { get; set; }
     public int Penize = 10;
+    public int Vyhry = 0;
     public List<CPmon> UloveniCPmoni = new List<CPmon>();
     public CPmon VybranyCPmon;
     public List<Item> Itemy = new List<Item>();

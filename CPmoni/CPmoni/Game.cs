@@ -5,7 +5,13 @@ class Game{
     public List<CPmon> VsichniCPmoni = new List<CPmon>();
     public List<CPmon> VsichniDostupniCPmoni = new List<CPmon>();
     public List<Item> VsechnyItemy = new List<Item>();
+
     public List<Schopnost> VsechnySchopnosti = new List<Schopnost>();
+    public List<Schopnost> VsechnySchopnostiLevel0 = new List<Schopnost>();
+    public List<Schopnost> VsechnySchopnostiLevel5 = new List<Schopnost>();
+    public List<Schopnost> VsechnySchopnostiLevel10 = new List<Schopnost>();
+    public List<Schopnost> VsechnySchopnostiLevel20 = new List<Schopnost>();
+
     public List<string> VsechnyJmenaCPmonu { get; set; }
     public List<string> VsechnyJmenaSchopnosti { get; set; }
     public List<string> VsechnyJmenaTreneru { get; set; }
@@ -36,13 +42,14 @@ class Game{
         Console.Write("\nSchopnosti: ");
         foreach(Schopnost s in cpmon.Schopnosti)
         {
-            Console.Write("\n");
-            PrintBarva(s.Jmeno, ConsoleColor.Cyan);
+            Console.Write("\n-------------\n");
+            PrintBarva(s.Jmeno, s.Barva);
             Console.Write("\n - Level Requirement: ");
             PrintBarva(s.LevelReq.ToString(), ConsoleColor.DarkYellow);
-            Console.Write("\n - Damage: ");
+            if(cpmon.Level < s.LevelReq) PrintBarva(" --- LOCKED", ConsoleColor.DarkRed);
+            Console.Write("\n * Damage: ");
             PrintBarva(s.Damage.ToString(), ConsoleColor.Red);
-            Console.Write("\n - Crit Chance: ");
+            Console.Write("\n * Crit Chance: ");
             PrintBarva(s.CritChance.ToString(), ConsoleColor.DarkRed);
             Console.Write("\n - Cooldown: ");
             PrintBarva(s.Cooldown.ToString(), ConsoleColor.DarkCyan);
@@ -76,12 +83,17 @@ class Game{
         Random random = new Random();
         for (int i = 0; i < 40; i++)
         {
-            int nameIndex = random.Next(0, VsechnyJmenaCPmonu.Count());
+            int nameIndex = random.Next(0, VsechnyJmenaCPmonu.Count);
             int health = random.Next(10, 20);
             int defense = random.Next(0, 5);
 
             CPmon Cpmon = new CPmon(VsechnyJmenaCPmonu[nameIndex], health, defense);
-            
+
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel0[random.Next(0, VsechnySchopnostiLevel0.Count)]);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel5[random.Next(0, VsechnySchopnostiLevel5.Count)]);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel10[random.Next(0, VsechnySchopnostiLevel10.Count)]);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel20[random.Next(0, VsechnySchopnostiLevel20.Count)]);
+
             VsechnyJmenaCPmonu.RemoveAt(nameIndex);
             VsichniCPmoni.Add(Cpmon);
         }
@@ -93,7 +105,7 @@ class Game{
 
     void CreateSchopnosti()
     {
-        Random random= new Random();
+        Random random = new Random();
         
         //level 0
         for (int i = 0; i < 10; i++)
@@ -103,9 +115,10 @@ class Game{
             int crit = random.Next(5, 20);
             int cooldown = random.Next(1, 2);
 
-            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> {},cooldown, 0);
+            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> {},ConsoleColor.Cyan,cooldown, 0);
             VsechnyJmenaSchopnosti.RemoveAt(nameIndex);
             VsechnySchopnosti.Add(Schopnost);
+            VsechnySchopnostiLevel0.Add(Schopnost);
 
         }
         //level 5
@@ -116,33 +129,36 @@ class Game{
             int crit = random.Next(10, 30);
             int cooldown = random.Next(2, 3);
 
-            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { }, cooldown, 5);
+            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { },ConsoleColor.DarkCyan, cooldown, 5);
             VsechnyJmenaSchopnosti.RemoveAt(nameIndex);
             VsechnySchopnosti.Add(Schopnost);
+            VsechnySchopnostiLevel5.Add(Schopnost);
         }
         //level 10
         for (int i = 0; i < 10; i++)
         {
             int nameIndex = random.Next(0, VsechnyJmenaSchopnosti.Count());
             int damage = random.Next(20, 40);
-            int crit = random.Next(20, 40);
+            int crit = random.Next(20, 50);
             int cooldown = random.Next(3, 5);
 
-            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { }, cooldown, 10);
+            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { },ConsoleColor.DarkMagenta, cooldown, 10);
             VsechnyJmenaSchopnosti.RemoveAt(nameIndex);
             VsechnySchopnosti.Add(Schopnost);
+            VsechnySchopnostiLevel10.Add(Schopnost);
         }
         //level 20
         for (int i = 0; i < 10; i++)
         {
             int nameIndex = random.Next(0, VsechnyJmenaSchopnosti.Count());
             int damage = random.Next(50, 110);
-            int crit = random.Next(30, 80);
+            int crit = random.Next(10, 70);
             int cooldown = random.Next(4, 8);
 
-            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { }, cooldown, 20);
+            Schopnost Schopnost = new Schopnost(VsechnyJmenaSchopnosti[nameIndex], damage, crit, new List<Effect> { },ConsoleColor.Magenta, cooldown, 20);
             VsechnyJmenaSchopnosti.RemoveAt(nameIndex);
             VsechnySchopnosti.Add(Schopnost);
+            VsechnySchopnostiLevel20.Add(Schopnost);
         }
     }
 
@@ -330,9 +346,91 @@ class Game{
 
     void StartFight()
     {
+        string input;
+        int index = 0;
+        bool loop = true;
+
+
+        // vybrani a balance protivnika
+        Random random = new Random();
+        int indexCPmona = random.Next(0, VsichniDostupniCPmoni.Count);
+        Protihrac protivnik = new Protihrac(VsechnyJmenaTreneru[random.Next(0, VsechnyJmenaTreneru.Count)], VsichniDostupniCPmoni[indexCPmona]);
+        VsichniDostupniCPmoni[indexCPmona].Level = player.Vyhry + random.Next(0, 2);
+        VsichniDostupniCPmoni.RemoveAt(indexCPmona);
+
+        // trochu napeti pred fightem
         Console.Clear();
-        // fight tady 
+        Console.Write("Putoval jsi po svete... (enter)");
+        Console.ReadLine();
+        Console.Write("...a nasel jsi...");
+        Console.ReadLine();
+        Console.Write("Divokeho ");
+        PrintBarva(protivnik.Jmeno, protivnik.Barva);
+        Console.ReadLine();
+
+        //vyber s cim budes fightit
+        Console.WriteLine("\nVyber si sveho CPmona: ");
+        VypisCPmonu();
+        while (loop)
+        {
+            Console.WriteLine("\n vyber: ");
+            input = Console.ReadLine();
+            if (input != "")
+            {
+                index = int.Parse(input);
+            }
+            if (index < player.UloveniCPmoni.Count || index > 0)
+            {
+                Console.WriteLine("jses si jist? (y/n)");
+                input = Console.ReadLine();
+                if (input == "y")
+                {
+                    loop = false;
+                }
+            }
+        }
+        player.VybranyCPmon = player.UloveniCPmoni[index - 1];
+        Fight(protivnik);
     }
+
+
+
+    void Fight(Protihrac protivnik)
+    {
+        string input;
+        bool loop = true;
+
+        Console.Clear();
+        Console.Write("souboj mezi ");
+        PrintBarva(player.VybranyCPmon.Jmeno, player.VybranyCPmon.Color);
+        Console.Write(" a ");
+        PrintBarva(protivnik.EnemyCPmon.Jmeno, protivnik.Barva);
+        Console.Write(" zacina! (enter)");
+        Console.ReadLine();
+
+
+
+
+    }
+
+
+
+    // vypis vsech ulovenych CPmonu a jejich staty
+    void VypisCPmonu()
+    {
+        int x = 0;
+        foreach (CPmon cpmon in player.UloveniCPmoni)
+        {
+            x++;
+            Console.WriteLine(x + ")");
+            PrintCPmonStats(cpmon);
+            Console.WriteLine("\n-----------------------------------\n");
+        }
+    }
+
+
+
+
 
     void Shop()
     {
