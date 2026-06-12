@@ -9,11 +9,14 @@ class CPmon
     public int Defense { get; set; }
     public int Level { get; set; }
     public List<Schopnost> Schopnosti = new List<Schopnost> { };
+    public List<int> SchopnostiCooldown = new List<int> { }; // jak dlouho jsou schopnosti v cooldownu
     public List<Effect> AktivniEffecty = new List<Effect> { };
+    public List<int> AktivniEffectyDecay = new List<int> { }; // jak dlouho jsou effecty aktivni
 
     public CPmon(string jmeno, int maxhealth, int defense,int level = 0)
     {
         Schopnost punch = new Schopnost("punch",3, 10, null);
+        SchopnostiCooldown.Add(punch.Cooldown);
         Schopnosti.Add(punch);
         Jmeno = jmeno;
         MaxHealth = maxhealth;

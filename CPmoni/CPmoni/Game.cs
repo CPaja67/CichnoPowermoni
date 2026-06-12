@@ -1,4 +1,5 @@
 using System.ComponentModel.Design;
+using System.Runtime.InteropServices.Marshalling;
 
 class Game{
 
@@ -31,6 +32,7 @@ class Game{
 
     void PrintCPmonStats(CPmon cpmon)
     {
+        int x = 1;
         Console.Write("\n");
         PrintBarva(cpmon.Jmeno, cpmon.Color);
         Console.Write("\nHP: ");
@@ -42,7 +44,8 @@ class Game{
         Console.Write("\nSchopnosti: ");
         foreach(Schopnost s in cpmon.Schopnosti)
         {
-            Console.Write("\n-------------\n");
+            Console.Write("\n-------------\n" + x + ")");
+            x++;
             PrintBarva(s.Jmeno, s.Barva);
             Console.Write("\n - Level Requirement: ");
             PrintBarva(s.LevelReq.ToString(), ConsoleColor.DarkYellow);
@@ -89,10 +92,22 @@ class Game{
 
             CPmon Cpmon = new CPmon(VsechnyJmenaCPmonu[nameIndex], health, defense);
 
-            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel0[random.Next(0, VsechnySchopnostiLevel0.Count)]);
-            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel5[random.Next(0, VsechnySchopnostiLevel5.Count)]);
-            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel10[random.Next(0, VsechnySchopnostiLevel10.Count)]);
-            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel20[random.Next(0, VsechnySchopnostiLevel20.Count)]);
+
+            int index = random.Next(0, VsechnySchopnostiLevel0.Count);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel0[index]);
+            Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel0[index].Cooldown);
+
+            index = random.Next(0, VsechnySchopnostiLevel5.Count);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel5[index]);
+            Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel5[index].Cooldown);
+
+            index = random.Next(0, VsechnySchopnostiLevel10.Count);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel10[index]);
+            Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel10[index].Cooldown);
+
+            index = random.Next(0, VsechnySchopnostiLevel20.Count);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel20[index]);
+            Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel20[index].Cooldown);
 
             VsechnyJmenaCPmonu.RemoveAt(nameIndex);
             VsichniCPmoni.Add(Cpmon);
@@ -373,7 +388,7 @@ class Game{
         VypisCPmonu();
         while (loop)
         {
-            Console.WriteLine("\n vyber: ");
+            Console.Write("vyber: ");
             input = Console.ReadLine();
             if (input != "")
             {
@@ -408,9 +423,196 @@ class Game{
         Console.Write(" zacina! (enter)");
         Console.ReadLine();
 
+        // loop fightu (turns)
+        while (loop)
+        {
+            Console.Clear();
+
+            // turn hraca
+            Console.Write("Jsi na rade, ");
+            PrintBarva(player.Jmeno, ConsoleColor.Blue);
+            Console.WriteLine(", co budes delat?");
+
+            PrintBarva("\n 1) Zautocit", ConsoleColor.Red);
+            PrintBarva("\n 2) Itemy", ConsoleColor.DarkMagenta);
+            PrintBarva("\n 3) Obrana", ConsoleColor.Gray);
+            PrintBarva("\n 4) Inspectnout CPmony (nebere tvuj tah)", ConsoleColor.Green);
+            Console.Write("\n\n(1-4): ");
+
+            input = Console.ReadLine();
+            if (input != "")
+            {
+                switch (input)
+                {
+                    case "1":
+                        Utok(protivnik);
+                        loop = KonecTahu(protivnik.EnemyCPmon);
+                        break;
+                    case "2":
+                        
+                        break;
+                    case "3":
+                        
+                        break;
+                    case "4":
+                        Console.Clear();
+                        Console.WriteLine("Tvuj CPmon:");
+                        PrintCPmonStats(player.VybranyCPmon);
+                        Console.WriteLine("\n\nProtivnikuv CPmon:");
+                        PrintCPmonStats(protivnik.EnemyCPmon);
+                        break;
+                }
+            }
 
 
 
+        }
+
+
+    }
+
+    //tahy
+
+    void Utok(Protihrac protivnik)
+    {
+        bool loop = true;
+        while (loop)
+        {
+            string input;
+            int index = 0;
+            Console.Clear();
+            PrintCPmonStats(player.VybranyCPmon);
+            Console.WriteLine("\nvyber schopnost: ");
+            input = Console.ReadLine();
+            if (input != "")
+            {
+                index = int.Parse(input);
+                if(index > 0 && index <= player.VybranyCPmon.Schopnosti.Count)
+                {
+                    Schopnost zvolenaSchopnost = player.VybranyCPmon.Schopnosti[index - 1];
+                    if (player.VybranyCPmon.Level >= zvolenaSchopnost.LevelReq)
+                    {
+                        if(player.VybranyCPmon.SchopnostiCooldown[index - 1] == zvolenaSchopnost.Cooldown)
+                        {
+                            player.VybranyCPmon.SchopnostiCooldown[index - 1] = 0;
+
+                            // tady se dela utoceni
+                            Console.WriteLine("Pouzil jsi ");
+                            PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
+                            Console.ReadLine();
+
+                            AplikujDamage(zvolenaSchopnost, protivnik.EnemyCPmon);
+                            
+                            loop = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tato schopnost je v cooldownu, musis pockat " + player.VybranyCPmon.SchopnostiCooldown[index - 1] + " tahu");
+                            Console.WriteLine("\n\nstiskni enter pro pokracovani...");
+                            Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tato schopnost je zamcena, musis dosahnout levelu " + zvolenaSchopnost.LevelReq + " pro pouziti");
+                        Console.WriteLine("\n\nstiskni enter pro pokracovani...");
+                        Console.ReadLine();
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    void AplikujDamage(Schopnost schopnost, CPmon kdo)
+    {
+        int damage = schopnost.Damage - kdo.Defense;
+        if (damage >= 0) damage = 1;
+        Console.WriteLine("Zpusobil jsi ");
+        PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
+        kdo.Health -= damage;
+        if(schopnost.CritChance > new Random().Next(0, 100))
+        {
+            PrintBarva("Criticky zasah, Zpusobil jsi jeste " + damage + "damage!", ConsoleColor.DarkRed);
+            kdo.Health -= damage;
+        }
+
+        if(schopnost.StatusEffects.Count > 0)
+        {
+            foreach (Effect e in schopnost.StatusEffects)
+            {
+                Console.WriteLine("Zpusobil jsi efekt ktery nejsou jeste"); // ZMENIUT
+                // AplikujEffect(e, kdo, false);
+            }
+        }
+    }
+
+
+
+
+    void AplikujEffect(Effect vybranyEffect, Protihrac protihrac, bool Kdo)
+    {
+        // True = hrac, false = protivnik
+        Random random = new Random();
+        switch (vybranyEffect.Jmeno)
+        {
+
+            // Nemuze nic delat na pocet tahu
+            case "Stun":
+
+                break;
+            // Nemuze nic delat dokud nedas DMG
+            case "Spanek":
+                break;
+
+            // Dealne malo dmg ze zacatku a potom zesily
+            case "Otraveni":
+                int MaxHpScale = protihrac.EnemyCPmon.MaxHealth / 25;
+                int damage = random.Next(1, 2);
+                break;
+
+            // Dealne hodne dmg a potom zeslabne
+            case "Paleni":
+                break;
+            // Zacne % regen podle Hp
+            case "Regenerace":
+                break;
+            // Dostane tolik hp kolik da dmg
+            case "Kradez Zivota":
+                break;
+
+            // snizi defense
+            case "Ziravina":
+                break;
+
+        }
+
+
+    }
+
+
+
+    bool KonecTahu(CPmon enemyCPmon)
+    {
+
+        if (enemyCPmon.Health <= 0)
+        {
+            int mone = 0;
+            Console.WriteLine("Gratuluji, porazil jsi protivnika!");
+            Console.ReadLine();
+            player.Vyhry++;
+            mone = new Random().Next(4, 10) * player.Vyhry;
+            player.Penize += mone;
+            Console.Write("Ziskal jsi ");
+            PrintBarva(mone.ToString() + " penizku", ConsoleColor.Yellow);
+            Console.ReadLine();
+            player.VybranyCPmon.Level += 1;
+            return false;
+        }
+
+        Console.Write("Konec tvého tahu, teď je na řadě protivník! (enter)");
+        return true;
     }
 
 
