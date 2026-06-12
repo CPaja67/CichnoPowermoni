@@ -67,6 +67,8 @@ class Game{
 
     //starter funce
 
+
+
     void CreateCPmons()
     {
         Random random = new Random();
@@ -83,6 +85,7 @@ class Game{
 
         VsichniDostupniCPmoni = VsichniCPmoni;
     }
+
 
 
     void CreateSchopnosti()
@@ -141,12 +144,15 @@ class Game{
     }
 
 
+
+
     void CreateItems()
     {
             // pak udelej
     }
 
      
+
     public Game()
     {
         VsechnyJmenaCPmonu = new List<string>() {"Begginov","Regginald", "Vrbac", "Flusak", "Fildax", "Pikok", "Cammer", "Smiller", "Hrdlova koza", "Rovno zubac", "Slopper", "Ligman", "Tulo", "Hyggus", "Featus", "Kirox", "Michilus", "Krkax", "Grower", "Treelax", "Sifilas", "Teemor", "Tumorax", "Gutalux", "Kneacker", "Aidus", "Drafilax", "Zetyrox", "Lukylax", "Sajminax", "Somcokotax", "Kinarux", "Weertax", "Syntox", "Lollytaz", "Makarax", "Akratux", "Apilox", "Herektex", "Evickus", "Chlubimir", "Ghassys", "Chlorence", "Egmin", "Deformed Disgusting Ugly Fat Swine", "Eppsyn", "David Ngo Phong", "polykac", "uzounek", "narazec", "lapylus", "deralit", "mogudaw", "negares", "casius", "perverzius", "cigitas", "begatas", "uranius", "hoshkuz", "galartos", "breberkus", "riditegas", "mocnygas", "kneegrower", "floydus", "kirkmaq", "urhafis" }; 
@@ -156,6 +162,7 @@ class Game{
         CreateItems();
         StartGame();
     }
+
 
 
     void StartGame()
@@ -190,8 +197,11 @@ class Game{
 
         CPmon jedna, dva, tri;
         jedna = VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)];
+        VsichniDostupniCPmoni.Remove(jedna);
         dva = VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)];
+        VsichniDostupniCPmoni.Remove(dva);
         tri = VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)];
+        VsichniDostupniCPmoni.Remove(tri);
 
         loop = true;
         while (loop)
@@ -242,6 +252,8 @@ class Game{
         MainMenu();
     }
 
+
+
     void MainMenu()
     {
 
@@ -274,16 +286,82 @@ class Game{
             PrintBarva("\n 4) ", ConsoleColor.Magenta);
             PrintBarva("Otevrit inventar", ConsoleColor.DarkMagenta);
             PrintBarva("\n 5) ", ConsoleColor.Gray);
-            PrintBarva("Zabit se (konec hry)", ConsoleColor.DarkGray);
+            PrintBarva("Skocit z mostu (konec hry)", ConsoleColor.DarkGray);
             Console.Write("\n\n(1-5): ");
 
             input = Console.ReadLine();
+            if (input != "")
+            {
+                switch (input)
+                {
+                    case "1":
+                        StartFight();
+                        break;
+                    case "2":
+                        Shop();
+                        break;
+                    case "3":
+                        ShowCPmoni();
+                        break;
+                    case "4":
+                        Inventory();
+                        break;
+                    case "5":
+                        loop = false;
+                        EndGame();
+                        break;
+                }
+            }
+
+
+            //konec loopu
         }
 
+
+
+
+        // konec main menu funce (tezke si pamatovat tolik zavorek)
     }
 
 
+    void StartFight()
+    {
+        Console.Clear();
+        // fight tady 
+    }
 
+    void Shop()
+    {
+        Console.Clear();
+        // shop tady
+    }
+
+    void ShowCPmoni()
+    {
+        Console.Clear();
+        // zobrazovani CPmonu tady
+    }
+
+    void Inventory()
+    {
+        Console.Clear();
+        // zobrazovani inventare tady
+    }
+
+    void EndGame()
+    {
+        Console.Clear();
+        Console.WriteLine("diky za hru!");
+        PrintBarva("\nvytvorili: ", ConsoleColor.Gray);
+        PrintBarva("\n\nPavel Klusak", ConsoleColor.Red);
+        PrintBarva("\nDaniel Smilek", ConsoleColor.DarkRed);
+        PrintBarva("\nFilip Blazek", ConsoleColor.DarkMagenta);
+        PrintBarva("\n\n\nBojoval jsi statecne,", ConsoleColor.Gray);
+        PrintBarva(player.Jmeno, ConsoleColor.Blue);
+        PrintBarva(", ale nakonec jsi byl premozen...", ConsoleColor.Gray);
+        Console.WriteLine("\n\n stiskni enter pro ukonceni...");
+        Console.ReadLine();
+    }
 
 
 
