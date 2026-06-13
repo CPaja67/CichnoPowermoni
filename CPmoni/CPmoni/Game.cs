@@ -55,7 +55,7 @@ class Game{
             Console.Write("\n * Crit Chance: ");
             PrintBarva(s.CritChance.ToString(), ConsoleColor.DarkRed);
             Console.Write("\n - Cooldown: ");
-            PrintBarva(s.Cooldown.ToString(), ConsoleColor.DarkCyan);
+            PrintBarva(s.Cooldown.ToString() + " / " + cpmon.SchopnostiCooldown[x-2].ToString(), ConsoleColor.DarkCyan);
 
             /* NEFAKA EFEKTY NEJSOU IMPLEMENTOVANY, ALE KDYBY BYLY, TAK BY SE PRINTOVALY TAKTO:
             Console.Write("\n - Effects: ");
@@ -92,8 +92,13 @@ class Game{
 
             CPmon Cpmon = new CPmon(VsechnyJmenaCPmonu[nameIndex], health, defense);
 
+            // kazdy CPmon ma 2 lvl0, 1 lvl5, 1 lvl10 a 1 lvl20 schopnost
 
             int index = random.Next(0, VsechnySchopnostiLevel0.Count);
+            Cpmon.Schopnosti.Add(VsechnySchopnostiLevel0[index]);
+            Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel0[index].Cooldown);
+
+            index = random.Next(0, VsechnySchopnostiLevel0.Count);
             Cpmon.Schopnosti.Add(VsechnySchopnostiLevel0[index]);
             Cpmon.SchopnostiCooldown.Add(VsechnySchopnostiLevel0[index].Cooldown);
 
@@ -386,18 +391,20 @@ class Game{
         //vyber s cim budes fightit
         Console.WriteLine("\nVyber si sveho CPmona: ");
         VypisCPmonu();
-        while (loop)
+        while (true)
         {
             Console.Write("vyber: ");
             input = Console.ReadLine();
-            if (input != "")
+
+            if (!string.IsNullOrWhiteSpace(input) && int.TryParse(input, out index))
             {
-                index = int.Parse(input);
+                if (index >= 1 && index <= player.UloveniCPmoni.Count)
+                {
+                    break; // platný výběr
+                }
             }
-            if (index < player.UloveniCPmoni.Count || index > 0)
-            {
-                loop = false;
-            }
+
+            Console.WriteLine("Neplatný výběr");
         }
         player.VybranyCPmon = player.UloveniCPmoni[index - 1];
         Fight(protivnik);
@@ -441,7 +448,21 @@ class Game{
                 switch (input)
                 {
                     case "1":
+
+                        Console.Clear();
+                        //utok
                         Utok(protivnik);
+                        //check jestli zije enemy
+                        if (protivnik.EnemyCPmon.Health <= 0) 
+                        {
+                            loop = KonecTahu(protivnik.EnemyCPmon);
+                            break;
+                        }
+                        Console.WriteLine(""); 
+                        //enemy ukot
+                        EnemyUtok(protivnik);
+
+                        //konec tahu
                         loop = KonecTahu(protivnik.EnemyCPmon);
                         break;
                     case "2":
@@ -500,14 +521,13 @@ class Game{
                             player.VybranyCPmon.SchopnostiCooldown[index - 1] = 0;
 
                             // tady se dela utoceni
-                            Console.WriteLine("Pouzil jsi ");
+                            Console.Clear();
+                            Console.Write("Pouzil jsi ");
                             PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
                             player.PocetPouzitychSchopnosti++;
                             Console.ReadLine();
-
                             AplikujDamage(zvolenaSchopnost, protivnik.EnemyCPmon);
                             Console.ReadLine();
-
                             loop = false;
                         }
                         else
@@ -529,12 +549,62 @@ class Game{
     }
 
 
-    // damage enemy CPmonu
+    // enemy utok
+    void EnemyUtok(Protihrac protivnik)
+    {
+        bool loop = true;
+        Random random = new Random();
+        int index = random.Next(0, protivnik.EnemyCPmon.Schopnosti.Count);
+        Schopnost zvolenaSchopnost = protivnik.EnemyCPmon.Schopnosti[index];
+
+        while (loop)
+        {
+            if (zvolenaSchopnost.LevelReq <= protivnik.EnemyCPmon.Level && protivnik.EnemyCPmon.SchopnostiCooldown[index] == zvolenaSchopnost.Cooldown)
+            {
+                zvolenaSchopnost = protivnik.EnemyCPmon.Schopnosti[index];
+                loop = false;
+                break;
+            }
+            index = random.Next(0, protivnik.EnemyCPmon.Schopnosti.Count);
+            zvolenaSchopnost = protivnik.EnemyCPmon.Schopnosti[index];
+        }
+
+        Console.Write("Protivnik pouzil ");
+        PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
+        Console.ReadLine();
+        AplikujEnemyDamage(zvolenaSchopnost, player.VybranyCPmon);
+        Console.ReadLine();
+    }
+
+
+
+
+    // damage do tvyho CPmonu
+    void AplikujEnemyDamage(Schopnost schopnost, CPmon kdo)
+    {
+        int damage = schopnost.Damage - kdo.Defense;
+        if (damage <= 0) damage = 1;
+        Console.Write("Protivnik zpusobil ");
+        PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
+        kdo.Health -= damage;
+        if (schopnost.CritChance > new Random().Next(0, 100))
+        {
+            PrintBarva("\nProtivnik zasahl kriticky, zpusobil jeste " + damage + " damage!", ConsoleColor.DarkRed);
+            kdo.Health -= damage;
+        }
+        Console.ReadLine();
+        PrintBarva("Zbyvajici HP tvyho CPmona: " + kdo.Health.ToString() + " / " + kdo.MaxHealth.ToString(), ConsoleColor.DarkGreen);
+    }
+
+
+
+
+    // damage do enemy CPmonu
     void AplikujDamage(Schopnost schopnost, CPmon kdo)
     {
         int damage = schopnost.Damage - kdo.Defense;
-        if (damage >= 0) damage = 1;
-        Console.WriteLine("Zpusobil jsi ");
+        if (damage <= 0) damage = 1;
+        Console.Write("Zpusobil jsi ");
         PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
         kdo.Health -= damage;
         player.CelkovyDamageDealt += damage;
@@ -544,6 +614,8 @@ class Game{
             kdo.Health -= damage;
             player.CelkovyDamageDealt += damage;
         }
+        Console.ReadLine();
+        PrintBarva("Protivnikuv zbyvajici HP: " + kdo.Health.ToString() + " / " + kdo.MaxHealth.ToString(), ConsoleColor.DarkGreen);
         /*
         if(schopnost.StatusEffects.Count > 0)
         {
@@ -607,7 +679,7 @@ class Game{
         if (enemyCPmon.Health <= 0)
         {
             int mone = 0;
-            Console.WriteLine("Gratuluji, porazil jsi protivnika! (enter)");
+            Console.Write("Gratuluji, porazil jsi protivnika! (enter)");
             Console.ReadLine();
             player.Vyhry++;
             mone = new Random().Next(4, 10) * player.Vyhry;
@@ -616,10 +688,22 @@ class Game{
             PrintBarva(mone.ToString() + " penizku", ConsoleColor.Yellow);
             Console.ReadLine();
             player.VybranyCPmon.Level += 1;
-            Console.Write("Tvuj CPmon se level-upnul");
+            Console.Write("Tvuj CPmon se level-upnul na level" + player.VybranyCPmon.Level.ToString());
             Console.ReadLine();
-            Console.Write("nini je tento CPmon v tvem arsenalu"); 
+            Console.Write("nini je "); 
+            PrintBarva(enemyCPmon.Jmeno, enemyCPmon.Color);
+            Console.Write("v tvem arsenalu!");
+            //heal CPmonu
             enemyCPmon.Health = enemyCPmon.MaxHealth;
+            //healne tvyho 20% HP
+            if (player.VybranyCPmon.MaxHealth / 5 + player.VybranyCPmon.Health > player.VybranyCPmon.MaxHealth)
+            {
+                player.VybranyCPmon.Health = player.VybranyCPmon.MaxHealth;
+            }
+            else
+            {
+                player.VybranyCPmon.Health = player.VybranyCPmon.MaxHealth / 5;
+            }
             player.UloveniCPmoni.Add(enemyCPmon);
             player.UlovenychCPmonu++;
             Console.ReadLine();
@@ -636,6 +720,8 @@ class Game{
             return false;
         }
 
+        //cooldown tick pro hrace
+
         foreach (Schopnost s in player.VybranyCPmon.Schopnosti)
         {
             int index = player.VybranyCPmon.Schopnosti.IndexOf(s);
@@ -645,7 +731,15 @@ class Game{
             }
         }
 
-        Console.Write("Konec tvého tahu, teď je na řadě protivník! (enter)");
+        //cooldown tick pro enemy CPmona
+        foreach (Schopnost s in enemyCPmon.Schopnosti)
+        {
+            int index = enemyCPmon.Schopnosti.IndexOf(s);
+            if (enemyCPmon.SchopnostiCooldown[index] < s.Cooldown)
+            {
+                enemyCPmon.SchopnostiCooldown[index]++;
+            }
+        }
         return true;
     }
 

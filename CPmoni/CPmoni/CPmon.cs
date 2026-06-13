@@ -15,9 +15,6 @@ class CPmon
 
     public CPmon(string jmeno, int maxhealth, int defense,int level = 0)
     {
-        Schopnost punch = new Schopnost("punch",3, 10, null);
-        SchopnostiCooldown.Add(punch.Cooldown);
-        Schopnosti.Add(punch);
         Jmeno = jmeno;
         MaxHealth = maxhealth;
         Color = ConsoleColor.Green;
