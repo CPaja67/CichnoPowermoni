@@ -269,6 +269,7 @@ class Game{
 
 
         Console.Clear();
+        Console.Write("\x1b[3J\x1b[2J\x1b[H"); // tenhle divnej comand clearne uplne vsehcno, protoze ten normalni clearne jenom to co je videt, ale kdyz se scrollne nahoru, tak tam je porad ten starej text, ale tenhle ho uplne smaze, je to divny ale funguje to
         Console.WriteLine("skvele, tvuj prvni CPmon je: ");
         PrintCPmonStats(player.UloveniCPmoni[0]);
         player.UlovenychCPmonu++;
@@ -421,6 +422,7 @@ class Game{
         while (loop)
         {
             Console.Clear();
+            Console.Write("\x1b[3J\x1b[2J\x1b[H"); // tady zase clear vseho protoze ty staty jsou moc dlouhy
 
             // turn hraca
             Console.Write("Jsi na rade, ");
@@ -450,7 +452,7 @@ class Game{
                         break;
                     case "4":
                         Console.Clear();
-                        PrintBarva("\n\n\n\n\n\nTvuj CPmon:", ConsoleColor.Blue);
+                        PrintBarva("\nTvuj CPmon:", ConsoleColor.Blue);
                         PrintCPmonStats(player.VybranyCPmon);
                         PrintBarva("\n\n\n\n\nProtivnikuv CPmon:", ConsoleColor.Red);
                         PrintCPmonStats(protivnik.EnemyCPmon);
@@ -466,8 +468,14 @@ class Game{
 
     }
 
-    //tahy
 
+
+
+    // TAHY ---------------
+
+
+
+    //player utok
     void Utok(Protihrac protivnik)
     {
         bool loop = true;
@@ -521,7 +529,7 @@ class Game{
     }
 
 
-
+    // damage enemy CPmonu
     void AplikujDamage(Schopnost schopnost, CPmon kdo)
     {
         int damage = schopnost.Damage - kdo.Defense;
