@@ -187,7 +187,52 @@ class Game{
 
     void CreateItems()
     {
-            // pak udelej
+        Item item = new Item(VsechnyJmenaItemu[0], "SmallHeal");
+        Random random = new Random();
+        for (int i = 0; i < 20; i++)
+        {
+            int index = random.Next(0, VsechnyJmenaItemu.Count);
+            int jmenoIndex = random.Next(0, 11);
+            switch (jmenoIndex)
+            {
+                case 0:
+                    item = new Item(VsechnyJmenaItemu[index], "SmallHeal");
+                    break;
+                case 1:
+                    item = new Item(VsechnyJmenaItemu[index], "MediumHeal");
+                    break;
+                case 2:
+                    item = new Item(VsechnyJmenaItemu[index], "BigHeal");
+                    break;
+                case 3:
+                    item = new Item(VsechnyJmenaItemu[index], "SmallDamage");
+                    break;
+                case 4:
+                    item = new Item(VsechnyJmenaItemu[index], "MediumDamage");
+                    break;
+                case 5:
+                    item = new Item(VsechnyJmenaItemu[index], "BigDamage");
+                    break;
+                case 6:
+                    item = new Item(VsechnyJmenaItemu[index], "Cleanse");
+                    break;
+                case 7:
+                    item = new Item(VsechnyJmenaItemu[index], "Fire");
+                    break;
+                case 8:
+                    item = new Item(VsechnyJmenaItemu[index], "Poison");
+                    break;
+                case 9:
+                    item = new Item(VsechnyJmenaItemu[index], "Sleep");
+                    break;
+                case 10:
+                    item = new Item(VsechnyJmenaItemu[index], "Stun");
+                    break;
+
+            }
+            VsechnyJmenaItemu.RemoveAt(index);
+            VsechnyItemy.Add(item);
+        }
     }
 
      
@@ -195,8 +240,9 @@ class Game{
     public Game()
     {
         VsechnyJmenaCPmonu = new List<string>() {"Begginov","Regginald", "Vrbac", "Flusak", "Fildax", "Pikok", "Cammer", "Smiller", "Hrdlova koza", "Rovno zubac", "Slopper", "Ligman", "Tulo", "Hyggus", "Featus", "Kirox", "Michilus", "Krkax", "Grower", "Treelax", "Sifilas", "Teemor", "Tumorax", "Gutalux", "Kneacker", "Aidus", "Drafilax", "Zetyrox", "Lukylax", "Sajminax", "Somcokotax", "Kinarux", "Weertax", "Syntox", "Lollytaz", "Makarax", "Akratux", "Apilox", "Herektex", "Evickus", "Chlubimir", "Ghassys", "Chlorence", "Egmin", "Deformed Disgusting Ugly Fat Swine", "Eppsyn", "David Ngo Phong", "polykac", "uzounek", "narazec", "lapylus", "deralit", "mogudaw", "negares", "casius", "perverzius", "cigitas", "begatas", "uranius", "hoshkuz", "galartos", "breberkus", "riditegas", "mocnygas", "kneegrower", "floydus", "kirkmaq", "urhafis" }; 
-        VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Bubnovani na Bricho", "Kourova Clona", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce", "Postrikani", "Rucni Prace", "Uder Hlavou", "Tezke Nohy", "Klouzave Nozky", "Lobotomie", "Vyvrcholeni", "Spiritualni Dotek", "vsaknuti", "prehlt", "rychle nasazeni", "cracknuti", "rychly uhyb", "fajny kotoul", "hybernace", "snow balls", "obkrojeni", "kojeni", "revize", "rewatch", "svacina", "prestrojeni", "pitny rezim", "rychly jazyk", "hod daleky", "mocny dym", "mokry sen" }; 
-        VsechnyJmenaTreneru = new List<string>() { "Zdenek", "Ferko Lacko", "Franta Majitel", "Uzka Vrba", "Jeff Einstein", "Bibi", "Bigus Eveckus", "Kotny Somko", "Uvolneny Leicman" };
+        VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Prasknuti Gumy", "Bubnovani na Bricho", "Kourova Clona", "HIV infekce", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce", "Postrikani", "Rucni Prace", "Uder Hlavou", "Tezke Nohy", "Klouzave Nozky", "Lobotomie", "Vyvrcholeni", "Spiritualni Dotek", "vsaknuti", "prehlt", "rychle nasazeni", "cracknuti", "rychly uhyb", "fajny kotoul", "hybernace", "snow balls", "obkrojeni", "kojeni", "revize", "rewatch", "svacina", "prestrojeni", "pitny rezim", "rychly jazyk", "hod daleky", "mocny dym", "mokry sen" }; 
+        VsechnyJmenaTreneru = new List<string>() { "Zdenek", "Ferko Lacko", "Franta Majitel", "Uzka Vrba", "Jeff Einstein", "Bibi", "Bigus Eveckus", "Kotny Somko", "Uvolneny Leicman", "Daniel", "Sweetie Fox", "Vladimir Putin", "Vrrrbka", "Nichulicka", "Kleinmann", "Grossfrau"};
+        VsechnyJmenaItemu = new List<string>() { "Lahvicka Mleka", "Kofola", "Pivko", "Flaska Vina", "Plesnivy Syr", "Suchy Rohlik", "Stary Boty", "Pouzity Kondom", "Prsten Sily", "Posmrkany Kapesnik", "CD", "Prosly Jogurt", "Smradlave Ponozky", "Kanalizacni Krysa", "AIDS", "Plastovy Sacek S Krvi", "Faktura", "Scat", "Piskoty", "Hypoteka na Dum", "Reprak"};
         CreateSchopnosti();
         CreateCPmons();
         CreateItems();
@@ -316,9 +362,9 @@ class Game{
 
 
             Console.Write("\nco chces delat?");
-            PrintBarva("\n 1) ", ConsoleColor.Red);
-            PrintBarva("Jit do sveta a ", ConsoleColor.DarkRed);
-            PrintBarva("bojovat", ConsoleColor.Red);
+            PrintBarva("\n 1) ", ConsoleColor.DarkRed);
+            PrintBarva("Jit do sveta a ", ConsoleColor.Red);
+            PrintBarva("bojovat", ConsoleColor.DarkRed);
             PrintBarva("\n 2) ", ConsoleColor.Yellow);
             PrintBarva("Navstivit obchod", ConsoleColor.DarkYellow);
             PrintBarva("\n 3) ", ConsoleColor.Green);
@@ -411,7 +457,7 @@ class Game{
     }
 
 
-
+    
     void Fight(Protihrac protivnik)
     {
         string input;
@@ -459,17 +505,29 @@ class Game{
                             break;
                         }
                         Console.WriteLine(""); 
-                        //enemy ukot
-                        EnemyUtok(protivnik);
 
+                        //enemy ukot
+
+                        EnemyTah(protivnik);
                         //konec tahu
                         loop = KonecTahu(protivnik.EnemyCPmon);
                         break;
                     case "2":
-                        
+                      
                         break;
                     case "3":
-                        
+
+                        Console.Clear();
+                        //defense
+                        player.VybranyCPmon.Brani = true;
+                        PrintBarva(player.VybranyCPmon.Jmeno , player.VybranyCPmon.Color);
+                        Console.Write(" se brani ");
+                        PrintBarva("(dostane jen 1/2 damage)\n", ConsoleColor.DarkGray);
+                        Console.ReadLine();
+
+                        EnemyTah(protivnik);
+                        loop = KonecTahu(protivnik.EnemyCPmon);
+
                         break;
                     case "4":
                         Console.Clear();
@@ -522,7 +580,8 @@ class Game{
 
                             // tady se dela utoceni
                             Console.Clear();
-                            Console.Write("Pouzil jsi ");
+                            PrintBarva(player.VybranyCPmon.Jmeno, player.VybranyCPmon.Color);
+                            Console.Write(" pouzil ");
                             PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
                             player.PocetPouzitychSchopnosti++;
                             Console.ReadLine();
@@ -550,6 +609,35 @@ class Game{
 
 
     // enemy utok
+
+    void EnemyTah(Protihrac protivnik)
+    {
+        Random random = new Random();
+        if (random.Next(0, 100) < 10)
+        {
+            // 10% sance ze enemy nebude utocit
+            PrintBarva(protivnik.EnemyCPmon.Jmeno, ConsoleColor.DarkRed);
+            Console.Write(" zakopnul!");
+            PrintBarva(" (nehraje tah)", ConsoleColor.DarkGray);
+            Console.ReadLine();
+        }
+        else if(random.Next(0, 100) < 30)
+        {
+            // 20% sance ze enemy bude defendovat
+            PrintBarva(protivnik.EnemyCPmon.Jmeno, ConsoleColor.DarkRed);
+            Console.Write(" se brani!");
+            PrintBarva(" (pristi kolo dostane jenom 1/2 damage)", ConsoleColor.DarkGray);
+            protivnik.EnemyCPmon.Brani = true;
+            Console.ReadLine();
+        }
+        else
+        {
+            EnemyUtok(protivnik);
+        }
+    }
+
+
+
     void EnemyUtok(Protihrac protivnik)
     {
         bool loop = true;
@@ -568,11 +656,11 @@ class Game{
             index = random.Next(0, protivnik.EnemyCPmon.Schopnosti.Count);
             zvolenaSchopnost = protivnik.EnemyCPmon.Schopnosti[index];
         }
-
-        Console.Write("Protivnik pouzil ");
+        PrintBarva(protivnik.EnemyCPmon.Jmeno, ConsoleColor.DarkRed);
+        Console.Write(" pouzil ");
         PrintBarva(zvolenaSchopnost.Jmeno, zvolenaSchopnost.Barva);
         Console.ReadLine();
-        AplikujEnemyDamage(zvolenaSchopnost, player.VybranyCPmon);
+        AplikujEnemyDamage(zvolenaSchopnost, player.VybranyCPmon, protivnik);
         Console.ReadLine();
     }
 
@@ -580,18 +668,30 @@ class Game{
 
 
     // damage do tvyho CPmonu
-    void AplikujEnemyDamage(Schopnost schopnost, CPmon kdo)
+    void AplikujEnemyDamage(Schopnost schopnost, CPmon kdo, Protihrac protivnik)
     {
         int damage = schopnost.Damage - kdo.Defense;
+        if (kdo.Brani)
+        {
+            damage = damage / 2;
+            PrintBarva(kdo.Jmeno, kdo.Color);
+            PrintBarva(" zabranil utok, ", ConsoleColor.DarkGray);
+            kdo.Brani = false;
+        }
+
         if (damage <= 0) damage = 1;
-        Console.Write("Protivnik zpusobil ");
+        PrintBarva(protivnik.EnemyCPmon.Jmeno, ConsoleColor.DarkRed);
+        Console.Write(" zpusobil ");
         PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
         kdo.Health -= damage;
+
         if (schopnost.CritChance > new Random().Next(0, 100))
         {
-            PrintBarva("\nProtivnik zasahl kriticky, zpusobil jeste " + damage + " damage!", ConsoleColor.DarkRed);
+            PrintBarva("\n" +protivnik.EnemyCPmon.Jmeno, ConsoleColor.DarkRed);
+            PrintBarva(" zasahl kriticky, zpusobil jeste " + damage + " damage!", ConsoleColor.DarkRed);
             kdo.Health -= damage;
         }
+
         Console.ReadLine();
         PrintBarva("Zbyvajici HP tvyho CPmona: " + kdo.Health.ToString() + " / " + kdo.MaxHealth.ToString(), ConsoleColor.DarkGreen);
     }
@@ -603,17 +703,28 @@ class Game{
     void AplikujDamage(Schopnost schopnost, CPmon kdo)
     {
         int damage = schopnost.Damage - kdo.Defense;
+        if (kdo.Brani)
+        {
+            damage = damage / 2;
+            PrintBarva(kdo.Jmeno, ConsoleColor.DarkRed);
+            PrintBarva(" zabranil utok, ", ConsoleColor.DarkGray); 
+            kdo.Brani = false;
+        }
+
         if (damage <= 0) damage = 1;
-        Console.Write("Zpusobil jsi ");
+        PrintBarva(player.VybranyCPmon.Jmeno, player.VybranyCPmon.Color);
+        Console.Write(" zpusobil ");
         PrintBarva(damage.ToString() + " damage", ConsoleColor.Red);
         kdo.Health -= damage;
         player.CelkovyDamageDealt += damage;
+
         if (schopnost.CritChance > new Random().Next(0, 100))
         {
             PrintBarva("\nCriticky zasah, Zpusobil jsi jeste " + damage + " damage!", ConsoleColor.DarkRed);
             kdo.Health -= damage;
             player.CelkovyDamageDealt += damage;
         }
+
         Console.ReadLine();
         PrintBarva("Protivnikuv zbyvajici HP: " + kdo.Health.ToString() + " / " + kdo.MaxHealth.ToString(), ConsoleColor.DarkGreen);
         /*
@@ -684,15 +795,17 @@ class Game{
             player.Vyhry++;
             mone = new Random().Next(4, 10) * player.Vyhry;
             player.Penize += mone;
+            player.CelkovyPenize += mone;
             Console.Write("Ziskal jsi ");
-            PrintBarva(mone.ToString() + " penizku", ConsoleColor.Yellow);
+            PrintBarva(mone.ToString() + " penizku", ConsoleColor.DarkYellow);
             Console.ReadLine();
             player.VybranyCPmon.Level += 1;
-            Console.Write("Tvuj CPmon se level-upnul na level" + player.VybranyCPmon.Level.ToString());
+            Console.Write("Tvuj CPmon se level-upnul na level ");
+            PrintBarva(player.VybranyCPmon.Level.ToString(), ConsoleColor.Yellow);
             Console.ReadLine();
             Console.Write("nini je "); 
             PrintBarva(enemyCPmon.Jmeno, enemyCPmon.Color);
-            Console.Write("v tvem arsenalu!");
+            Console.Write(" v tvem arsenalu!");
             //heal CPmonu
             enemyCPmon.Health = enemyCPmon.MaxHealth;
             //healne tvyho 20% HP
@@ -765,13 +878,29 @@ class Game{
     void Shop()
     {
         Console.Clear();
-        // shop tady
+        Random random = new Random();
+        List<Item> items = new List<Item>();
+
+        for(int i = 0; i < 3; i++)
+        {
+            items.Add(VsechnyItemy[random.Next(0, VsechnyItemy.Count)]);
+        }
+
+        Shop shop = new Shop(VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)], items);
+        
     }
 
     void ShowCPmoni()
     {
         Console.Clear();
-        // zobrazovani CPmonu tady
+        PrintBarva("Tvoji CPmoni:\n\n", ConsoleColor.Blue);
+        foreach (CPmon cpmon in player.UloveniCPmoni)
+        {
+            PrintCPmonStats(cpmon);
+            Console.WriteLine("\n-----------------------------------\n");
+        }
+        Console.WriteLine("\n\n(enter)");
+        Console.ReadLine();
     }
 
     void Inventory()
@@ -784,9 +913,10 @@ class Game{
     void VypsaniStatu() 
     {
         Console.WriteLine("Staty:");
-        Console.Write("\nVyhry: " + player.Vyhry.ToString());
-        Console.Write("\nPocet Pouzitych schopnosti: " + player.PocetPouzitychSchopnosti.ToString());
-        Console.Write("\nUloveni CPmoni: " + player.UlovenychCPmonu.ToString());
+        PrintBarva("\nVyhry: " + player.Vyhry.ToString(), ConsoleColor.Yellow);
+        PrintBarva("\nCelkem ziskano penez: " + player.CelkovyPenize.ToString(), ConsoleColor.DarkYellow);
+        PrintBarva("\nPocet Pouzitych schopnosti: " + player.PocetPouzitychSchopnosti.ToString(), ConsoleColor.DarkMagenta);
+        PrintBarva("\nUloveni CPmoni: " + player.UlovenychCPmonu.ToString(), ConsoleColor.Green);
     }
 
     void EndGame()
@@ -797,7 +927,7 @@ class Game{
         PrintBarva("\n\nPavel Klusak", ConsoleColor.Red);
         PrintBarva("\nDaniel Smilek", ConsoleColor.DarkRed);
         PrintBarva("\nFilip Blazek", ConsoleColor.DarkMagenta);
-        PrintBarva("\n\n\nBojoval jsi statecne,", ConsoleColor.Gray);
+        PrintBarva("\n\n\nBojoval jsi statecne, ", ConsoleColor.Gray);
         PrintBarva(player.Jmeno, ConsoleColor.Blue);
         PrintBarva(", ale nakonec jsi byl premozen...", ConsoleColor.Gray);
         Console.WriteLine("\n\nstiskni enter pro vypsani statu...");

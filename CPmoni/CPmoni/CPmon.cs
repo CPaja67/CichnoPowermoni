@@ -7,6 +7,7 @@ class CPmon
     public int MaxHealth { get; set; }
     public int Health { get; set; }
     public int Defense { get; set; }
+    public bool Brani = false;
     public int Level { get; set; }
     public List<Schopnost> Schopnosti = new List<Schopnost> { };
     public List<int> SchopnostiCooldown = new List<int> { }; // jak dlouho jsou schopnosti v cooldownu
