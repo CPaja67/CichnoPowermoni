@@ -886,7 +886,7 @@ class Game{
             items.Add(VsechnyItemy[random.Next(0, VsechnyItemy.Count)]);
         }
 
-        Shop shop = new Shop(VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)], items);
+        Shop shop = new Shop(VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)], items, player.Vyhry);
         
     }
 
