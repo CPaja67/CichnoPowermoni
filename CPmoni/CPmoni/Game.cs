@@ -342,6 +342,9 @@ class Game{
         // main menu loop, tady se bude dít většina věcí, tady se bude bojovat, nakupovat, atd.       BTW tohle autocomplete AI ktery je v Visual studiu je nejaky moc dobry ono to vi co chci udelat to je divny pomoc
         bool loop = true;
         string input;
+        //generace shopu aby byl fresh pokazde
+        Shop shop = GenerateShop();
+
         while (loop)
         {
             if (player.UloveniCPmoni.Count == 0)
@@ -382,9 +385,10 @@ class Game{
                 {
                     case "1":
                         StartFight();
+                        shop = GenerateShop();
                         break;
                     case "2":
-                        Shop();
+                        Shop(shop);
                         break;
                     case "3":
                         ShowCPmoni();
@@ -874,21 +878,145 @@ class Game{
 
 
 
-
-    void Shop()
+    Shop GenerateShop()
     {
-        Console.Clear();
         Random random = new Random();
         List<Item> items = new List<Item>();
-
-        for(int i = 0; i < 3; i++)
+        int index;
+        for (int i = 0; i < 3; i++)
         {
             items.Add(VsechnyItemy[random.Next(0, VsechnyItemy.Count)]);
         }
-
-        Shop shop = new Shop(VsichniDostupniCPmoni[random.Next(0, VsichniDostupniCPmoni.Count)], items, player.Vyhry);
-        
+        index = random.Next(0, VsichniDostupniCPmoni.Count);
+        Shop shop = new Shop(VsichniDostupniCPmoni[index], items, player.Vyhry);
+        VsichniDostupniCPmoni.RemoveAt(index);
+        return shop;
     }
+
+
+    void Shop(Shop shop)
+    {
+        Random random = new Random();
+        string input;
+        int parsedInput, index;
+        bool loop = true;
+
+
+        //loop shopu pro neschopne lidi co neumi psat spravne
+        while (loop)
+        {
+            VypisShopu(shop);
+            Console.Write("\n\nCo to teda bude? (1-4, 5 = odchod): ");
+            input = Console.ReadLine();
+
+            if (input != "" && int.TryParse(input, out parsedInput))
+            {
+                parsedInput = int.Parse(input);
+                if (parsedInput > 0 && parsedInput < 6)
+                {
+                    switch (parsedInput)
+                    {
+                        //CPmon
+                        case 1:
+                            Console.Clear();
+                            PrintCPmonStats(shop.AvailableCPmon);
+                            Console.Write("\n\nChces si tuhle krasku koupit za ");
+                            PrintBarva(shop.CPmonPrice + " penizku?", ConsoleColor.DarkYellow);
+                            PrintBarva(" (y/n)", ConsoleColor.DarkGray);
+                            input = Console.ReadLine();
+                            if (input == "y") 
+                            {
+                                //kdyz na to ma a che
+                                if (CheckPenez(shop.CPmonPrice))
+                                {
+                                    player.Penize -= shop.CPmonPrice;
+                                    player.UloveniCPmoni.Add(shop.AvailableCPmon);
+                                    shop.VykoupeniCPmona();
+                                    player.UlovenychCPmonu++;
+                                }
+                                //nema money
+                                else
+                                {
+                                    Console.WriteLine("Je mi lito, ale nemas na to prachy");
+                                    Console.ReadLine();
+                                }
+                            }
+                            // nenchce
+                            else
+                            {
+                                Console.WriteLine("\nBud si neco vyber nebo vypal!");
+                                Console.ReadLine();
+                            }
+                            break;
+
+
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                        case 5:
+                            Console.Write("\nNashledanou, ");
+                            PrintBarva(player.Jmeno, ConsoleColor.Cyan);
+                            loop = false;
+                            Console.ReadLine();
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+
+    void VypisShopu(Shop shop)
+    {
+        Console.Clear();
+        Console.Write("Ahoj, ");
+        PrintBarva(player.Jmeno, ConsoleColor.Cyan);
+        if (shop.AvailableCPmon != null) 
+        {
+            Console.Write(", dneska je na vyber ");
+            PrintBarva(shop.AvailableCPmon.Jmeno, shop.AvailableCPmon.Color);
+            Console.Write("\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout ");
+        }
+        else
+        {
+            Console.Write(", uz sis dnesniho CPmona koupil...");
+            Console.Write("\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout ");
+        }
+
+        foreach(Item i in shop.Items)
+        {
+            PrintBarva(i.Jmeno + ", ", ConsoleColor.DarkMagenta);
+        }
+        Console.Write("\nMas ");
+        PrintBarva(player.Penize + " penizku", ConsoleColor.DarkYellow);
+    }
+
+
+    bool CheckPenez(int price)
+    {
+        if(player.Penize >= price)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    void BuyItemu(Item item) 
+    {
+
+    }
+
+
+
+
 
     void ShowCPmoni()
     {

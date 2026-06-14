@@ -32,10 +32,9 @@
         }
     }
 
-
-    public void VypisShop()
+    public void VykoupeniCPmona()
     {
-        Console.Write("\nDnes si muzes koupit ");
-
+        AvailableCPmon = null;
     }
+
 }
