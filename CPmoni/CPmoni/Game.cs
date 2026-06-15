@@ -347,6 +347,7 @@ class Game{
 
         while (loop)
         {
+            Console.Write("\x1b[3J\x1b[2J\x1b[H");
             if (player.UloveniCPmoni.Count == 0)
             {
                 EndGame();
@@ -475,6 +476,12 @@ class Game{
         Console.Write(" zacina! (enter)");
         Console.ReadLine();
 
+
+        //reset defense
+        player.VybranyCPmon.Defense = player.VybranyCPmon.MaxDefense;
+        protivnik.EnemyCPmon.Defense = protivnik.EnemyCPmon.MaxDefense;
+
+
         // loop fightu (turns)
         while (loop)
         {
@@ -515,6 +522,7 @@ class Game{
                         EnemyTah(protivnik);
                         //konec tahu
                         loop = KonecTahu(protivnik.EnemyCPmon);
+                        Console.Write("\x1b[3J\x1b[2J\x1b[H");
                         break;
                     case "2":
                       
@@ -698,6 +706,14 @@ class Game{
 
         Console.ReadLine();
         PrintBarva("Zbyvajici HP tvyho CPmona: " + kdo.Health.ToString() + " / " + kdo.MaxHealth.ToString(), ConsoleColor.DarkGreen);
+
+        //defense se postupne snizuje
+        if (kdo.Defense >= 1)
+        {
+            kdo.Defense--;
+            PrintBarva("\nDefense se snizil! " + kdo.Defense + " / " + kdo.MaxDefense, ConsoleColor.DarkGray);
+
+        }
     }
 
 
@@ -741,6 +757,14 @@ class Game{
             }
         }
         */
+
+        //defense se postupne snizuje
+        if (kdo.Defense >= 1)
+        {
+            kdo.Defense--;
+            PrintBarva("\nDefense se snizil! " + kdo.Defense + " / " + kdo.MaxDefense, ConsoleColor.DarkGray);
+
+        }
     }
 
 
@@ -793,6 +817,14 @@ class Game{
         // umrel enemyCPmon
         if (enemyCPmon.Health <= 0)
         {
+            foreach (Schopnost s in player.VybranyCPmon.Schopnosti)
+            {
+                int index = player.VybranyCPmon.Schopnosti.IndexOf(s);
+                if (player.VybranyCPmon.SchopnostiCooldown[index] < s.Cooldown)
+                {
+                    player.VybranyCPmon.SchopnostiCooldown[index] = s.Cooldown;
+                }
+            }
             int mone = 0;
             Console.Write("Gratuluji, porazil jsi protivnika! (enter)");
             Console.ReadLine();
@@ -812,14 +844,14 @@ class Game{
             Console.Write(" v tvem arsenalu!");
             //heal CPmonu
             enemyCPmon.Health = enemyCPmon.MaxHealth;
-            //healne tvyho 20% HP
-            if (player.VybranyCPmon.MaxHealth / 5 + player.VybranyCPmon.Health > player.VybranyCPmon.MaxHealth)
+            //healne tvyho 50% HP
+            if (player.VybranyCPmon.MaxHealth / 2 + player.VybranyCPmon.Health > player.VybranyCPmon.MaxHealth)
             {
                 player.VybranyCPmon.Health = player.VybranyCPmon.MaxHealth;
             }
             else
             {
-                player.VybranyCPmon.Health = player.VybranyCPmon.MaxHealth / 5;
+                player.VybranyCPmon.Health += player.VybranyCPmon.MaxHealth / 2;
             }
             player.UloveniCPmoni.Add(enemyCPmon);
             player.UlovenychCPmonu++;
@@ -889,7 +921,9 @@ class Game{
         }
         index = random.Next(0, VsichniDostupniCPmoni.Count);
         Shop shop = new Shop(VsichniDostupniCPmoni[index], items, player.Vyhry);
+        VsichniDostupniCPmoni[index].Level = player.Vyhry;
         VsichniDostupniCPmoni.RemoveAt(index);
+        shop.FusionPrice = (shop.CPmonPrice + (new Random().Next(3, 5) * (player.Vyhry + 1)));
         return shop;
     }
 
@@ -906,13 +940,13 @@ class Game{
         while (loop)
         {
             VypisShopu(shop);
-            Console.Write("\n\nCo to teda bude? (1-4, 5 = odchod): ");
+            Console.Write("\n\nCo to teda bude? (1-5, 6 = odchod): ");
             input = Console.ReadLine();
 
             if (input != "" && int.TryParse(input, out parsedInput))
             {
                 parsedInput = int.Parse(input);
-                if (parsedInput > 0 && parsedInput < 6)
+                if (parsedInput > 0 && parsedInput < 7)
                 {
                     switch (parsedInput)
                     {
@@ -960,6 +994,10 @@ class Game{
 
                             break;
                         case 5:
+                            //fusion
+                            FusionMenu(shop);
+                            break;
+                        case 6:
                             Console.Write("\nNashledanou, ");
                             PrintBarva(player.Jmeno, ConsoleColor.Cyan);
                             loop = false;
@@ -971,29 +1009,162 @@ class Game{
         }
     }
 
+    void FusionMenu(Shop shop)
+    {
+        Console.Write("\x1b[3J\x1b[2J\x1b[H");
+        if (player.UloveniCPmoni.Count <= 1)
+        {
+            Console.Write("Na fusion potrebujes minimalne 2 CPmony! ");
+            Console.Write("\n(enter) ");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.Write("Pro fusion potrebujes 2 cpmony \nPrvni cpmon ktereho si vyberes dostane vetsi ");
+            PrintBarva("LEVEL", ConsoleColor.Yellow);
+            Console.Write(", druhy CPmon se ");
+            PrintBarva("SMAZE", ConsoleColor.DarkRed);
+            Console.Write("\n\n------------------------------------------");
+            Console.Write("\n\nPokud prvni vybrany CPmon ma VETSI level jak druhy CPmon, dostane pouze ");
+            PrintBarva("+1 LEVEL", ConsoleColor.Yellow);
+            Console.Write("\nPokud prvni vybrany CPmon ma MENSI level nebo STEJNY jak druhy CPmon, dostane  ");
+            PrintBarva("+2 LEVELY", ConsoleColor.Yellow);
+            Console.Write("\n\n1) Fuse CPmony ");
+            PrintBarva(shop.FusionPrice.ToString() + " penizku", ConsoleColor.DarkYellow);
+
+            Console.Write("\n2) ");
+            PrintBarva("Odchod", ConsoleColor.Red);
+            Console.Write("\n\nMas ");
+            PrintBarva(player.Penize + " penizku", ConsoleColor.DarkYellow);
+            bool loop = true;
+            while (loop)
+            {
+                Console.Write("\n\nCo to bude? (1-2): ");
+                string input = Console.ReadLine();
+                int parsedInput = 0;
+                if (input != "" && int.TryParse(input, out parsedInput))
+                {
+                    switch (parsedInput)
+                    {
+                        case 1:
+                            // Funkce na fuse
+                            Fusion(shop);
+                            loop = false;
+                            break;
+
+                        case 2:
+
+                            loop = false;
+                            break;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+
+    void Fusion(Shop shop)
+    {
+
+        CPmon prvni = null, druhy = null;
+
+        bool loop = true;
+        Console.Write("\x1b[3J\x1b[2J\x1b[H");
+        if (!CheckPenez(shop.FusionPrice))
+        {
+            Console.WriteLine("Nemas na to penize");
+            Console.ReadLine();
+            return;
+        }
+        player.Penize -= shop.FusionPrice;
+        VypisCPmonu();
+
+        while (loop) 
+        {
+            Console.Write("\nVyber prvniho CPmona: ");
+            string input;
+            int parsedInput;
+            input = Console.ReadLine();
+            if (input != "" && int.TryParse(input, out parsedInput))
+            {
+                if (player.UloveniCPmoni.Count >= parsedInput)
+                {
+                    prvni = player.UloveniCPmoni[parsedInput-1];
+                    loop = false;
+                }
+            }
+        }
+
+        loop = true;
+        while (loop)
+        {
+            Console.Write("\nVyber druhyho CPmona: ");
+            string input;
+            int parsedInput;
+            input = Console.ReadLine();
+            if (input != "" && int.TryParse(input, out parsedInput) && player.UloveniCPmoni.Count >= parsedInput && player.UloveniCPmoni[parsedInput-1] != prvni)
+            {
+                druhy = player.UloveniCPmoni[parsedInput-1];
+                loop = false;
+                break;
+            }
+        }
+
+        Console.Write("\x1b[3J\x1b[2J\x1b[H");
+        PrintBarva(prvni.Jmeno, prvni.Color);
+        Console.Write(" se spojil s ");
+        PrintBarva(druhy.Jmeno, druhy.Color);
+        if (prvni.Level > druhy.Level)
+        {
+            prvni.Level += 1;
+            PrintBarva("\n"+prvni.Jmeno, prvni.Color);
+            PrintBarva(" zvysil svuj level o 1 na level " + prvni.Level.ToString(), ConsoleColor.Yellow);
+
+        }
+        else
+        {
+            prvni.Level += 2;
+            PrintBarva("\n" + prvni.Jmeno, prvni.Color);
+            PrintBarva(" zvysil svuj level o 2 na level " + prvni.Level.ToString(), ConsoleColor.Yellow);
+
+        }
+        player.UloveniCPmoni.Remove(druhy);
+        druhy.Health = druhy.MaxHealth;
+        VsichniDostupniCPmoni.Add(druhy);
+        Console.ReadLine();
+    }
+
+
 
     void VypisShopu(Shop shop)
     {
+        int x = 0;
+
+
         Console.Clear();
         Console.Write("Ahoj, ");
         PrintBarva(player.Jmeno, ConsoleColor.Cyan);
         if (shop.AvailableCPmon != null) 
         {
             Console.Write(", dneska je na vyber ");
-            PrintBarva(shop.AvailableCPmon.Jmeno, shop.AvailableCPmon.Color);
-            Console.Write("\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout ");
+            PrintBarva("1) "+shop.AvailableCPmon.Jmeno, shop.AvailableCPmon.Color);
+            Console.Write("\n\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout \n");
         }
         else
         {
             Console.Write(", uz sis dnesniho CPmona koupil...");
-            Console.Write("\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout ");
+            Console.Write("\n\nnebo jestli sis prisel pro nejake predmety, muzu ti nabidnout \n");
         }
 
-        foreach(Item i in shop.Items)
-        {
-            PrintBarva(i.Jmeno + ", ", ConsoleColor.DarkMagenta);
-        }
-        Console.Write("\nMas ");
+        VypisItemStatu(shop.Items, shop);
+
+        Console.Write("\n5) Muzes spojit dva CPmony do jednoho ");
+        PrintBarva(shop.FusionPrice.ToString() + " penizku", ConsoleColor.DarkYellow);
+
+        Console.Write("\n\nMas ");
         PrintBarva(player.Penize + " penizku", ConsoleColor.DarkYellow);
     }
 
@@ -1006,6 +1177,24 @@ class Game{
         }
         return false;
     }
+
+    //Itmes
+
+    void VypisItemStatu(List<Item> ShopItems, Shop shop)
+    {
+        int x = 1;
+        foreach (Item v in ShopItems)
+        {
+            x++;
+            Console.Write(x + ") ");
+            PrintBarva(v.Jmeno, ConsoleColor.Magenta);
+            PrintBarva(" (" +v.Typ+ ")", ConsoleColor.Gray);
+            PrintBarva(" " + shop.ItemPrices[x-2] + " penizku", ConsoleColor.DarkYellow);
+            Console.WriteLine();
+        }
+    }
+
+
 
 
 

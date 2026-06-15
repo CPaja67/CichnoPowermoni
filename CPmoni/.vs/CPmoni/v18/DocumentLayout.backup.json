@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\schopnost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\schopnost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "CPmoni\\Shop.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Shop.cs",
               "RelativeToolTip": "CPmoni\\Shop.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAwwCQAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-14T10:59:59.749Z",
               "EditorCaption": ""
@@ -67,16 +67,16 @@
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Game.cs",
               "RelativeDocumentMoniker": "CPmoni\\Game.cs",
-              "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Game.cs",
-              "RelativeToolTip": "CPmoni\\Game.cs",
-              "ViewState": "AgIAAHEDAAAAAAAAAAAAAH8DAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Game.cs*",
+              "RelativeToolTip": "CPmoni\\Game.cs*",
+              "ViewState": "AgIAAEEEAAAAAAAAAAAewFYEAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T11:38:30.831Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Item.cs",
               "RelativeDocumentMoniker": "CPmoni\\Item.cs",
@@ -88,20 +88,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "CPmon.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\CPmon.cs",
               "RelativeDocumentMoniker": "CPmoni\\CPmon.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\CPmon.cs",
               "RelativeToolTip": "CPmoni\\CPmon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwBgAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T11:38:30.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Protihrac.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Protihrac.cs",
               "RelativeDocumentMoniker": "CPmoni\\Protihrac.cs",
@@ -113,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Schopnost.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Schopnost.cs",
               "RelativeDocumentMoniker": "CPmoni\\Schopnost.cs",
@@ -125,19 +125,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "Hrac.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Hrac.cs",
               "RelativeDocumentMoniker": "CPmoni\\Hrac.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Hrac.cs",
               "RelativeToolTip": "CPmoni\\Hrac.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA6wAQAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T11:38:30.828Z"
+              "WhenOpened": "2026-06-12T11:38:30.828Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Effect.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Effect.cs",
               "RelativeDocumentMoniker": "CPmoni\\Effect.cs",

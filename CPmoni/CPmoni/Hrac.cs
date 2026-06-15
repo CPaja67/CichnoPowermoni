@@ -2,7 +2,7 @@ class Hrac
 {
 
     public string Jmeno { get; set; }
-    public int Penize = 10;
+    public int Penize = 100;
     //staty
     public int CelkovyPenize = 10;
     public int Vyhry = 0;

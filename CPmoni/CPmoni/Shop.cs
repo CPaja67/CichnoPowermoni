@@ -4,6 +4,7 @@
     public List<int> ItemPrices = new List<int>();
     public CPmon AvailableCPmon {  get; set; }
     public int CPmonPrice { get; set; }
+    public int FusionPrice { get; set; }
 
 
 
