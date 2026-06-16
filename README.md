@@ -1,6 +1,6 @@
-#CichnaPowermoni - Školní projekt do programování
+# CichnaPowermoni - Školní projekt do programování
 
-##vytvořili:
+## vytvořili:
 - Pavel Klusák
 - Daniel Smílek
 - Filip Blažek
