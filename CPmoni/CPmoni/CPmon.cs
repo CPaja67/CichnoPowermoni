@@ -29,7 +29,14 @@ class CPmon
     public void LevelUp(int levels)
     {
         Level += levels;
-        MaxHealth += 1 ;
+        for (int i = 0; i < levels; i++)
+        {
+            MaxHealth = MaxHealth + MaxHealth / 4;
+            Health = MaxHealth;
+            MaxDefense++;
+            Defense = MaxDefense;
+        }
+        if (Level >= 20) Color = ConsoleColor.Magenta;
     }
 
 

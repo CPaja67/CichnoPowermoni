@@ -426,7 +426,7 @@ class Game{
         Random random = new Random();
         int indexCPmona = random.Next(0, VsichniDostupniCPmoni.Count);
         Protihrac protivnik = new Protihrac(VsechnyJmenaTreneru[random.Next(0, VsechnyJmenaTreneru.Count)], VsichniDostupniCPmoni[indexCPmona]);
-        VsichniDostupniCPmoni[indexCPmona].Level = player.Vyhry + random.Next(0, 2);
+        VsichniDostupniCPmoni[indexCPmona].LevelUp(player.Vyhry + random.Next(0, 2));
         VsichniDostupniCPmoni.RemoveAt(indexCPmona);
 
         // trochu napeti pred fightem
@@ -835,7 +835,7 @@ class Game{
             Console.Write("Ziskal jsi ");
             PrintBarva(mone.ToString() + " penizku", ConsoleColor.DarkYellow);
             Console.ReadLine();
-            player.VybranyCPmon.Level += 1;
+            player.VybranyCPmon.LevelUp(1);
             Console.Write("Tvuj CPmon se level-upnul na level ");
             PrintBarva(player.VybranyCPmon.Level.ToString(), ConsoleColor.Yellow);
             Console.ReadLine();
@@ -921,7 +921,7 @@ class Game{
         }
         index = random.Next(0, VsichniDostupniCPmoni.Count);
         Shop shop = new Shop(VsichniDostupniCPmoni[index], items, player.Vyhry);
-        VsichniDostupniCPmoni[index].Level = player.Vyhry;
+        VsichniDostupniCPmoni[index].LevelUp(player.Vyhry);
         VsichniDostupniCPmoni.RemoveAt(index);
         shop.FusionPrice = (shop.CPmonPrice + (new Random().Next(3, 5) * (player.Vyhry + 1)));
         return shop;
@@ -1119,14 +1119,14 @@ class Game{
         PrintBarva(druhy.Jmeno, druhy.Color);
         if (prvni.Level > druhy.Level)
         {
-            prvni.Level += 1;
+            prvni.LevelUp(1);
             PrintBarva("\n"+prvni.Jmeno, prvni.Color);
             PrintBarva(" zvysil svuj level o 1 na level " + prvni.Level.ToString(), ConsoleColor.Yellow);
 
         }
         else
         {
-            prvni.Level += 2;
+            prvni.LevelUp(2);
             PrintBarva("\n" + prvni.Jmeno, prvni.Color);
             PrintBarva(" zvysil svuj level o 2 na level " + prvni.Level.ToString(), ConsoleColor.Yellow);
 

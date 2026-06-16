@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\cpmon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|solutionrelative:cpmoni\\hrac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83FA36A-6C31-40DD-87FC-834A375B8EFD}|CPmoni\\CPmoni.csproj|c:\\users\\pavel\\desktop\\cichnopowermoni\\cpmoni\\cpmoni\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
@@ -62,13 +62,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Game.cs",
               "RelativeDocumentMoniker": "CPmoni\\Game.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Game.cs",
               "RelativeToolTip": "CPmoni\\Game.cs",
-              "ViewState": "AgIAAMkEAAAAAAAAAAAtwO4EAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGQAAAAAAAAAAAApwHYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T11:38:30.831Z",
               "EditorCaption": ""
@@ -87,13 +87,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CPmon.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\CPmon.cs",
               "RelativeDocumentMoniker": "CPmoni\\CPmon.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\CPmon.cs",
               "RelativeToolTip": "CPmoni\\CPmon.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA4wB8AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T11:38:30.734Z",
               "EditorCaption": ""
@@ -124,15 +124,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Hrac.cs",
               "DocumentMoniker": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Hrac.cs",
               "RelativeDocumentMoniker": "CPmoni\\Hrac.cs",
               "ToolTip": "C:\\Users\\Pavel\\Desktop\\CichnoPowermoni\\CPmoni\\CPmoni\\Hrac.cs",
               "RelativeToolTip": "CPmoni\\Hrac.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAA6wAQAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwAgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T11:38:30.828Z"
+              "WhenOpened": "2026-06-12T11:38:30.828Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
