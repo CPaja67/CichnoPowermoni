@@ -26,5 +26,11 @@ class CPmon
 
     }
 
+    public void LevelUp(int levels)
+    {
+        Level += levels;
+        MaxHealth += 1 ;
+    }
+
 
 }

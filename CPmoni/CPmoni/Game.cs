@@ -236,12 +236,12 @@ class Game{
     }
 
      
-
+    
     public Game()
     {
         VsechnyJmenaCPmonu = new List<string>() {"Begginov","Regginald", "Vrbac", "Flusak", "Fildax", "Pikok", "Cammer", "Smiller", "Hrdlova koza", "Rovno zubac", "Slopper", "Ligman", "Tulo", "Hyggus", "Featus", "Kirox", "Michilus", "Krkax", "Grower", "Treelax", "Sifilas", "Teemor", "Tumorax", "Gutalux", "Kneacker", "Aidus", "Drafilax", "Zetyrox", "Lukylax", "Sajminax", "Somcokotax", "Kinarux", "Weertax", "Syntox", "Lollytaz", "Makarax", "Akratux", "Apilox", "Herektex", "Evickus", "Chlubimir", "Ghassys", "Chlorence", "Egmin", "Deformed Disgusting Ugly Fat Swine", "Eppsyn", "David Ngo Phong", "polykac", "uzounek", "narazec", "lapylus", "deralit", "mogudaw", "negares", "casius", "perverzius", "cigitas", "begatas", "uranius", "hoshkuz", "galartos", "breberkus", "riditegas", "mocnygas", "kneegrower", "floydus", "kirkmaq", "urhafis" }; 
         VsechnyJmenaSchopnosti = new List<string>() {"Cvachtani", "Vrceni", "Ocasni Bic", "Sladky Polibek", "Prasknuti Gumy", "Bubnovani na Bricho", "Kourova Clona", "HIV infekce", "Ztvrdnuti", "Nitovy Strih", "Liznuti", "Vyplatni Den", "Metronom", "Darecek", "Lichoceni", "Namyvka", "Kastrace", "Chrapani", "Pomlekovani", "Uvareni vajec", "Flakovani", "Zivnuti", "Vycvakavani", "Vztek", "Frustrace", "Navrat", "Rychla Ruka", "Po Tobe", "Zruseni","Vzruseni", "Kolibavy Tanec", "Lechtani", "Oslava", "Dobra Hlava", "Rychla Hvezda", "Strihnuti", "Hod Kamene","Hod Hraskem", "Uskrceni", "Analni Inpsekce", "Postrikani", "Rucni Prace", "Uder Hlavou", "Tezke Nohy", "Klouzave Nozky", "Lobotomie", "Vyvrcholeni", "Spiritualni Dotek", "vsaknuti", "prehlt", "rychle nasazeni", "cracknuti", "rychly uhyb", "fajny kotoul", "hybernace", "snow balls", "obkrojeni", "kojeni", "revize", "rewatch", "svacina", "prestrojeni", "pitny rezim", "rychly jazyk", "hod daleky", "mocny dym", "mokry sen" }; 
-        VsechnyJmenaTreneru = new List<string>() { "Zdenek", "Ferko Lacko", "Franta Majitel", "Uzka Vrba", "Jeff Einstein", "Bibi", "Bigus Eveckus", "Kotny Somko", "Uvolneny Leicman", "Daniel", "Sweetie Fox", "Vladimir Putin", "Vrrrbka", "Nichulicka", "Kleinmann", "Grossfrau"};
+        VsechnyJmenaTreneru = new List<string>() { "Zdenek", "Ferko Lacko", "Franta Majitel", "Uzka Vrba", "Adam Hilt", "Jeff Einstein", "Bibi", "Bigus Eveckus", "Kotny Somko", "Uvolneny Leicman", "Daniel", "Sweetie Fox", "Vladimir Putin", "Vrrrbka", "Nichulicka", "Kleinmann", "Grossfrau"};
         VsechnyJmenaItemu = new List<string>() { "Lahvicka Mleka", "Kofola", "Pivko", "Flaska Vina", "Plesnivy Syr", "Suchy Rohlik", "Stary Boty", "Pouzity Kondom", "Prsten Sily", "Posmrkany Kapesnik", "CD", "Prosly Jogurt", "Smradlave Ponozky", "Kanalizacni Krysa", "AIDS", "Plastovy Sacek S Krvi", "Faktura", "Scat", "Piskoty", "Hypoteka na Dum", "Reprak"};
         CreateSchopnosti();
         CreateCPmons();
